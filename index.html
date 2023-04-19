@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>약목록</h1>
+    <button onclick="call()">호출</button>
+    <p id="medName"></p>
+    <p id="chart"></p>
+    <p id="medColor"></p>
+    <p id="shape"></p>
+    <p id="entpName"></p>
+    <p><img id="medImg" src="" alt="" style="height: 150px;"></p>
+</body>
+<script>
+    function call() {
+        fetch('http://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01?serviceKey=7g5vSz6O7oF1oyMa%2FdCiUUwmaRA10IlVnv0qa4qOrdUJmiHzR2eMi5upWITgkX2DM6F4FwiSn1mkFa9iVFBDcA%3D%3D&numOfRows=3&pageNo=1&type=json')
+            .then(res => res.json())
+            .then(data => {
+                const imageUrl = data['body']['items']['0']['ITEM_IMAGE'];
+                document.querySelector('#medImg').setAttribute('src', imageUrl);
+                document.querySelector('#medName').innerHTML = data['body']['items']['0']['ITEM_NAME']
+            });
+    }
+
+
+</script>
+
+</html>
